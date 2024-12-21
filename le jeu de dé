@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define NUM_ROLLS 10000
+
+int main() {
+    char target ;
+    int count = 0;         
+    int roll; 
+    
+    
+    do {
+        
+        printf("Please enter a number between 1 and 6: ");
+        if (scanf("%d", &target) != 1) {  // Check if input is valid number
+    while (getchar() != '\n');  // Clear invalid input from buffer
+    printf("Invalid input. Please enter a number between 1 and 6.\n");
+}
+    } while (target < 1 || target > 6); 
+    
+    printf("You entered a valid number: %d\n", target);
+    srand(time(0));
+    for (int i = 0; i < NUM_ROLLS; i++) {
+        roll = (rand() % 6) + 1;  
+        if (roll == target) {
+            count++; 
+        }
+    }
+    double observed_frequency = (double)count / NUM_ROLLS;
+    double theoretical_probability = 1.0 / 6.0;
+    printf("Number of rolls: %d\n", NUM_ROLLS);
+    printf("Target number: %d\n", target);
+    printf("Observed frequency: %.4f\n", observed_frequency);
+    printf("Theoretical probability: %.4f\n", theoretical_probability);
+    return 0;
+}
